@@ -1,5 +1,3 @@
-//file_utils.c
-
 #include "file_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,8 +7,6 @@
 //char* filename: path of file relative to exe
 //char** buffer: pointer to the pointer that hold the files data
 int read_file( char* filename, char **buffer ){
-
-	printf("filename: %s\n", filename);
 	
 	//calculate size of file using stat
 	struct stat st;
@@ -25,7 +21,9 @@ int read_file( char* filename, char **buffer ){
 	
 	//check if we successfully grabed the file
 	if(file == NULL){
+		//print error to error stream
 		fprintf(stderr, "Could not open file");
+		//return fail
 		return 1;
 	}	
 	
@@ -33,8 +31,6 @@ int read_file( char* filename, char **buffer ){
 	int numElements = size / (int)sizeof(char);
 	//load the characters into the buffer with fread
 	fread(*buffer, sizeof(char), numElements, file);
-
-	printf("%s\n", *buffer);
 	
 	//return succsess
 	return 0;
@@ -45,5 +41,9 @@ int read_file( char* filename, char **buffer ){
 //char* buffer: data to be written
 //int size: size of data
 int write_file( char* filename, char *buffer, int size){
+	
+	FILE* file = fopen(filename, "wb");
+	
+	fwrite(buffer, sizeof(char), size, file);
 	return 0;
 }

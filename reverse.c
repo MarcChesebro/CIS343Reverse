@@ -19,9 +19,6 @@ int main(int argc, char** argv){
 		read_file(argv[1], &data);
 		
 		//flip the data
-		//printf("data size:%lu\n", sizeof(*data));
-		//printf("data:%s\n", data);
-		//printf("char size:%lu\n", sizeof(char));
 		
 		//calculate size of file using stat
 		struct stat st;
@@ -30,12 +27,14 @@ int main(int argc, char** argv){
 
 		//determine the number of elements in the data array
 		int numElement = size / sizeof(char);
-		printf("numElement%i\n", numElement);
-		
+			
 		//create a char* to hold the fliped data
 		char* flipData;
 		
+		//allocate memory for the flipped data
 		flipData = (char*)malloc(size);
+
+		//loop through data backwards and fill flipdata
 		int j = 0;
 		for(int i = numElement - 1; i >= 0; i--){
 			
@@ -43,8 +42,10 @@ int main(int argc, char** argv){
 			j++;
 		}
 
-		printf("flipData:%s\n", flipData);
+		//write the data back to the file
+		write_file(argv[1], flipData, size);
 
+		//free data and flipdata
 		free(data);
 		free(flipData);
 	}else{
