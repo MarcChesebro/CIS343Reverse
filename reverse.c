@@ -10,21 +10,21 @@
 int main(int argc, char** argv){
 	
 	//check to make sure 2 arguments were passed	
-	if(argc == 2){
+	if(argc == 3){
 
 		//declare the char* for the data
 		char* data;
 
-		//fill data buffer from file
-		read_file(argv[1], &data);
+		//fill data buffer from file and store the size of the file
+		int size = read_file(argv[1], &data);
+		
+		//check to see if the file was read succeffully and return -1 if it did not.
+		//read_file() already output and error to the error stream so no need to print another
+		if(size == -1){
+			return -1;
+		}
 		
 		//flip the data
-		
-		//calculate size of file using stat
-		struct stat st;
-		stat(argv[1], &st);
-		int size = st.st_size;
-
 		//determine the number of elements in the data array
 		int numElement = size / sizeof(char);
 			
@@ -42,13 +42,20 @@ int main(int argc, char** argv){
 			j++;
 		}
 
-		//write the data back to the file
-		write_file(argv[1], flipData, size);
+		//write the data back to the file and store what was returned in writeError 
+		//for error checking
+		int writeError = write_file(argv[2], flipData, size);
+		
+		//check if the write was succesfull if not return -1
+		if(writeError == -1){
+			return -1;
+		}
 
 		//free data and flipdata
 		free(data);
 		free(flipData);
 	}else{
+		//print error if the ammount of of agruments was incorrect
 		fprintf(stderr, "Incorrect amount of arguments");
 	}
 }

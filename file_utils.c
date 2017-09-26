@@ -6,6 +6,7 @@
 //function that reads a file
 //char* filename: path of file relative to exe
 //char** buffer: pointer to the pointer that hold the files data
+//returns the size of the file read in or -1 if the file could not be read
 int read_file( char* filename, char **buffer ){
 	
 	//calculate size of file using stat
@@ -24,7 +25,7 @@ int read_file( char* filename, char **buffer ){
 		//print error to error stream
 		fprintf(stderr, "Could not open file");
 		//return fail
-		return 1;
+		return -1;
 	}	
 	
 	//determine the number of characters in the file
@@ -33,7 +34,7 @@ int read_file( char* filename, char **buffer ){
 	fread(*buffer, sizeof(char), numElements, file);
 	
 	//return succsess
-	return 0;
+	return size;
 }
 
 //Function that writes to a file
@@ -42,8 +43,17 @@ int read_file( char* filename, char **buffer ){
 //int size: size of data
 int write_file( char* filename, char *buffer, int size){
 	
-	FILE* file = fopen(filename, "wb");
+	//open the file
+	FILE* file = fopen(filename, "w");
 	
-	fwrite(buffer, sizeof(char), size, file);
+	//try to write to the file 
+	int rSize = fwrite(buffer, sizeof(char), size, file);
+	
+	//if the size that was written was different than the
+	//size we were trying to write return -1 and print an error
+	if(rSize != size){
+		fprintf(stderr, "Could not write to the file");
+		return -1;
+	}
 	return 0;
 }
