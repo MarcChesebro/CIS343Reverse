@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-//function that reads a file
-//char* filename: path of file relative to exe
-//char** buffer: pointer to the pointer that hold the files data
-//returns the size of the file read in or -1 if the file could not be read
+/*function that reads a file
+*char* filename: path of file relative to exe
+*char** buffer: pointer to the pointer that hold the files data
+*returns the size of the file read, or -1 if the file could not be read
+*/
 int read_file( char* filename, char **buffer ){
 	
 	//calculate size of file using stat
@@ -33,14 +34,16 @@ int read_file( char* filename, char **buffer ){
 	//load the characters into the buffer with fread
 	fread(*buffer, sizeof(char), numElements, file);
 	
-	//return succsess
+	//return size of the file read
 	return size;
 }
-
-//Function that writes to a file
-//char* filename: path to write to/create
-//char* buffer: data to be written
-//int size: size of data
+/*
+*Function that writes to a file
+*char* filename: path to write to/create
+*char* buffer: data to be written
+*int size: size of data
+*returns 0 on success, or -1 on failure
+*/
 int write_file( char* filename, char *buffer, int size){
 	
 	//open the file

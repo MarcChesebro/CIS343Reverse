@@ -1,6 +1,10 @@
-//reverse.c
-//used to reverse all the characters in a file
-//format: reverse [inputFile] [outputFile]
+/*************************************************************
+* used to reverse all the characters in a file and output it 
+* to another
+* format: ./reverse [inputFile] [outputFile]
+*
+* Author: Marc Chesebro
+*************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
