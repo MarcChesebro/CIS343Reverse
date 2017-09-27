@@ -1,3 +1,11 @@
+/*************************************************************
+* Provides simple file utilities:
+* reading files
+* writing to files
+*
+* Author: Marc Chesebro
+*************************************************************/
+
 #include "file_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
