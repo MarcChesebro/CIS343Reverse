@@ -11,7 +11,8 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-/*function that reads a file
+/*
+*function that reads a file
 *char* filename: path of file relative to exe
 *char** buffer: pointer to the pointer that hold the files data
 *returns the size of the file read, or -1 if the file could not be read
