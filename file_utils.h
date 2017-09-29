@@ -1,4 +1,10 @@
-//file_utils.h
+/*************************************************************
+* Provides simple file utilities:
+* reading files
+* writing to files
+*
+* Author: Marc Chesebro
+*************************************************************/
 
 //include guards
 #ifndef file_utils
